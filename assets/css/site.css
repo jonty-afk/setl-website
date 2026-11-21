@@ -1193,6 +1193,13 @@ body.inner .site-header .nav-cta {
   .hero-plane {
     display: none;
   }
+  /* On phones the hero is tall and narrow, which stretched the curve into a
+     steep spike through the text. Here it keeps its natural shape and arcs
+     gently over the tops of the phones instead. */
+  .hero .hero-arc {
+    inset: auto 0 269px 0;
+    height: 143px;
+  }
   .container {
     padding-inline: 20px;
   }
