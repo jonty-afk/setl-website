@@ -94,3 +94,45 @@
   }
   requestAnimationFrame(tick);
 })();
+
+// Home page: the front phone runs a small loop that fills in the checklist.
+(function () {
+  var screen = document.querySelector('.hero .screen');
+  if (!screen) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return; // keeps the still screenshot
+
+  var STEPS = [1300, 2700, 4300, 5900, 7500, 9100]; // when each step lands (ms)
+  var LOOP = 13400;
+  var timers = [];
+  var running = false;
+
+  function stop() {
+    timers.forEach(clearTimeout);
+    timers = [];
+  }
+  function clear() {
+    for (var i = 1; i <= STEPS.length; i++) screen.classList.remove('s' + i);
+  }
+  function play() {
+    stop();
+    clear();
+    STEPS.forEach(function (at, i) {
+      timers.push(setTimeout(function () { screen.classList.add('s' + (i + 1)); }, at));
+    });
+    timers.push(setTimeout(play, LOOP));
+  }
+
+  screen.classList.add('is-live');
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (entries) {
+      if (entries[0].isIntersecting) {
+        if (!running) { running = true; play(); }
+      } else {
+        running = false;
+        stop();
+      }
+    }).observe(screen);
+  } else {
+    play();
+  }
+})();
