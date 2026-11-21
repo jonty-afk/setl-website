@@ -907,7 +907,7 @@ body.inner .site-header .nav-cta {
   font-size: 26px;
   letter-spacing: -0.025em;
 }
-.prose h2:first-child {
+.prose > h2:first-child {
   margin-top: 0;
 }
 .prose .draft-note + .legal-section h2 {
@@ -934,8 +934,12 @@ body.inner .site-header .nav-cta {
 .legal-section {
   padding-bottom: 8px;
 }
-.legal-section h2 {
+.prose .legal-section h2 {
   margin-top: 40px;
+}
+.prose ol + p,
+.prose ul + p {
+  margin-top: 14px;
 }
 .draft-note {
   padding: 14px 18px;
