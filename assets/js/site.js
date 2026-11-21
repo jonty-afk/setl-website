@@ -38,7 +38,6 @@
   var trail = document.getElementById('hero-trail-path');
   if (!svg || !plane || !route || !trail) return;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  if (window.innerWidth <= 600) return; // on phones the line stays still
 
   var length = route.getTotalLength();
   var DURATION = 9000;

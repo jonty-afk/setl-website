@@ -1191,7 +1191,8 @@ body.inner .site-header .nav-cta {
     font-size: 16.5px;
   }
   .hero-plane {
-    display: none;
+    width: 24px;
+    height: 24px;
   }
   /* On phones the hero is tall and narrow, which stretched the curve into a
      steep spike through the text. Here it keeps its natural shape and arcs
