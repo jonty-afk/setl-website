@@ -136,3 +136,94 @@
     play();
   }
 })();
+
+// Early-access form: saves the sign-up to SETL's private list (Supabase).
+// Visitors can only add themselves; nobody can read the list from the website.
+(function () {
+  var forms = document.querySelectorAll('form[data-ea]');
+  if (!forms.length) return;
+  var EMAIL = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+
+  function monthOptions(select) {
+    var date = new Date();
+    date.setDate(1);
+    for (var i = 0; i < 12; i++) {
+      var label = date.toLocaleDateString('en-NZ', { month: 'long', year: 'numeric' });
+      var option = document.createElement('option');
+      option.value = label;
+      option.textContent = label;
+      select.appendChild(option);
+      date.setMonth(date.getMonth() + 1);
+    }
+  }
+
+  Array.prototype.forEach.call(forms, function (form) {
+    var wrap = form.parentNode;
+    var done = wrap.querySelector('.ea-done');
+    var msg = form.querySelector('.ea-msg');
+    var button = form.querySelector('.ea-submit');
+    var nameInput = form.elements.name;
+    var emailInput = form.elements.email;
+    monthOptions(form.elements.flying);
+
+    function showError(html, field) {
+      msg.innerHTML = html;
+      msg.hidden = false;
+      if (field) {
+        field.setAttribute('aria-invalid', 'true');
+        field.focus();
+      }
+    }
+    function clearError() {
+      msg.hidden = true;
+      nameInput.removeAttribute('aria-invalid');
+      emailInput.removeAttribute('aria-invalid');
+    }
+    function finish() {
+      form.hidden = true;
+      done.hidden = false;
+      done.focus();
+    }
+    [nameInput, emailInput].forEach(function (input) {
+      input.addEventListener('input', function () {
+        input.removeAttribute('aria-invalid');
+      });
+    });
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      clearError();
+      var name = nameInput.value.trim();
+      var email = emailInput.value.trim();
+      if (!name) return showError('Please tell us your name.', nameInput);
+      if (!EMAIL.test(email)) return showError('Please check your email address.', emailInput);
+      if (form.elements.company.value) return finish(); // a bot filled the hidden field
+
+      button.disabled = true;
+      button.textContent = 'Joining…';
+      fetch(form.dataset.endpoint + '/rest/v1/early_access', {
+        method: 'POST',
+        headers: {
+          apikey: form.dataset.key,
+          'Content-Type': 'application/json',
+          Prefer: 'return=minimal',
+        },
+        body: JSON.stringify({ name: name, email: email, flying: form.elements.flying.value || null }),
+      })
+        .then(function (res) {
+          // 409 means this email is already on the list: that's a success too.
+          if (res.ok || res.status === 409) return finish();
+          throw new Error('status ' + res.status);
+        })
+        .catch(function () {
+          showError(
+            'Sorry, that didn&rsquo;t go through. Please try again, or email <a href="mailto:hello@setl.nz?subject=SETL%20early%20access">hello@setl.nz</a>.',
+          );
+        })
+        .then(function () {
+          button.disabled = false;
+          button.textContent = 'Get early access';
+        });
+    });
+  });
+})();
