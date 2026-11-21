@@ -1195,10 +1195,14 @@ body.inner .site-header .nav-cta {
   }
   /* On phones the hero is tall and narrow, which stretched the curve into a
      steep spike through the text. Here it keeps its natural shape and arcs
-     gently over the tops of the phones instead. */
+     gently over the tops of the phones, which come first on phones. */
   .hero .hero-arc {
-    inset: auto 0 269px 0;
+    inset: calc(var(--header-h) + 24px) 0 auto 0;
     height: 143px;
+  }
+  .hero-copy {
+    padding-top: 36px;
+    padding-bottom: 56px;
   }
   .container {
     padding-inline: 20px;
@@ -1208,6 +1212,7 @@ body.inner .site-header .nav-cta {
   }
   .hero-phones {
     min-height: 400px;
+    order: -1; /* on phones the app comes first, then the words */
   }
   .hero-phones .phone--main {
     width: 218px;
