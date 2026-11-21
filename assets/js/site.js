@@ -30,6 +30,44 @@
   }
 })();
 
+// Home page on tablets and phones: the hero is taller than it is wide there, so the
+// curve (which stretches to fit its box) would turn into a steep spike through the
+// text. Instead it keeps its natural shape and sits just above the front phone.
+(function () {
+  var hero = document.querySelector('.hero');
+  var svg = hero && hero.querySelector('.hero-arc');
+  var phone = hero && hero.querySelector('.hero-phones .phone--main');
+  if (!svg || !phone) return;
+  var stacked = window.matchMedia('(max-width: 1040px)');
+
+  // Distance from the top of the hero, ignoring the phones' rise-in animation.
+  function offsetWithin(el, ancestor) {
+    var top = 0;
+    while (el && el !== ancestor) {
+      top += el.offsetTop;
+      el = el.offsetParent;
+    }
+    return top;
+  }
+
+  function place() {
+    if (!stacked.matches) {
+      svg.style.top = svg.style.bottom = svg.style.height = '';
+      return;
+    }
+    var height = Math.round(hero.clientWidth * 0.38); // the drawing's natural proportions
+    var crestGap = 26; // the top of the curve sits this far above the front phone
+    var top = offsetWithin(phone, hero) - crestGap + (height * 20) / 520;
+    svg.style.top = Math.round(top) + 'px';
+    svg.style.bottom = 'auto';
+    svg.style.height = height + 'px';
+  }
+
+  place();
+  window.addEventListener('resize', place);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(place);
+})();
+
 // Home page: a small plane flies along the dotted line, and the dots vanish behind it.
 (function () {
   var svg = document.querySelector('.hero .hero-arc');

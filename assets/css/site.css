@@ -1090,7 +1090,7 @@ body.inner .site-header .nav-cta {
     gap: 8px;
   }
   .hero-copy {
-    padding-bottom: 24px;
+    padding-bottom: 48px; /* room for the curve above the phones */
   }
   .hero-phones {
     min-height: 500px;
