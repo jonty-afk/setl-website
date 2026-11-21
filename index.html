@@ -45,10 +45,11 @@
         <span></span><span></span><span></span>
       </button>
       <nav class="site-nav" id="site-nav" aria-label="Main">
-        <a href="/#how">How it works</a>
-        <a href="/#included">What you get</a>
-        <a href="/#promises">Promises</a>
-        <a href="/#faq">FAQ</a>
+        <a href="/how-it-works/">How it works</a>
+        <a href="/what-you-get/">What you get</a>
+        <a href="/the-app/">The app</a>
+        <a href="/promises/">Promises</a>
+        <a href="/faq/">FAQ</a>
         <a href="/support/">Support</a>
         <a class="btn btn-sm btn-primary nav-cta" href="mailto:hello@setl.nz?subject=SETL%20early%20access">Get early access</a>
       </nav>
@@ -59,7 +60,13 @@
 <section class="hero">
   <div class="hero-bg" aria-hidden="true">
     <svg class="hero-arc" viewBox="0 0 1200 520" preserveAspectRatio="none">
-      <path d="M-20 470 C 260 120, 760 60, 1220 250" fill="none" stroke="rgba(255,255,255,.28)" stroke-width="1.5" stroke-dasharray="3 9" stroke-linecap="round" />
+      <defs>
+        <!-- The mask hides the dotted line behind the plane as it flies (driven by site.js). -->
+        <mask id="hero-trail" maskUnits="userSpaceOnUse" x="-60" y="-20" width="1320" height="560">
+          <path id="hero-trail-path" d="M-20 470 C 260 120, 760 60, 1220 250" fill="none" stroke="#fff" stroke-width="18" />
+        </mask>
+      </defs>
+      <path id="hero-route" d="M-20 470 C 260 120, 760 60, 1220 250" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="1.6" stroke-dasharray="3 9" stroke-linecap="round" mask="url(#hero-trail)" />
     </svg>
     <span class="hero-plane"></span>
   </div>
@@ -70,7 +77,7 @@
       <p class="lead">SETL meets you at the airport, books your first stay and helps you find a room you can trust, so your first week isn&rsquo;t a gamble.</p>
       <div class="cta-row">
         <a class="btn btn-light" href="mailto:hello@setl.nz?subject=SETL%20early%20access&amp;body=Hi%20SETL%2C%0A%0AI%27d%20like%20early%20access.%0A%0AMy%20name%3A%0AMy%20flight%20date%3A%0A">Get early access</a>
-        <a class="btn btn-ghost" href="#how">See how it works</a>
+        <a class="btn btn-ghost" href="/how-it-works/">See how it works</a>
       </div>
       <p class="fine">iPhone and Android apps are coming soon. Email us to join the early-access list.</p>
       <ul class="hero-points" aria-label="Highlights">
@@ -131,24 +138,25 @@
       <li class="journey-step reveal">
         <span class="journey-num">01</span>
         <h3>Create your account</h3>
-        <p>Sign in with a code we email you. No passwords. Tell us your name exactly as it is on your passport.</p>
+        <p>Sign in with a code we email you. No passwords.</p>
       </li>
       <li class="journey-step reveal">
         <span class="journey-num">02</span>
         <h3>Share your flight</h3>
-        <p>Add your flight number and arrival time. We check it before you land and adjust your pickup if it&rsquo;s delayed.</p>
+        <p>We watch it and adjust your pickup if it&rsquo;s delayed.</p>
       </li>
       <li class="journey-step reveal">
         <span class="journey-num">03</span>
-        <h3>Choose your first stay and ride</h3>
-        <p>Pick a stay and how long you need it, then a prepaid transfer or a simple route guide. We book it and confirm it in the app before you fly.</p>
+        <h3>Choose your stay and ride</h3>
+        <p>We book it and confirm it in the app before you fly.</p>
       </li>
       <li class="journey-step reveal">
         <span class="journey-num">04</span>
         <h3>Land and be met</h3>
-        <p>Someone is waiting with your name, plus a transport card and a local SIM. Then we help you find a longer-term room.</p>
+        <p>Someone waits with your name, a transport card and a SIM.</p>
       </li>
     </ol>
+    <p class="more reveal"><a class="text-link" href="/how-it-works/">See how it works in detail</a></p>
   </div>
 </section>
 
@@ -170,93 +178,43 @@
         <p>An AT HOP transport card and a local SIM, handed to you when you land.</p>
       </article>
       <article class="card feature reveal">
-        <div class="card-icon"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 13l1.6-4.4a2 2 0 0 1 1.9-1.3h11a2 2 0 0 1 1.9 1.3L21 13v4a1 1 0 0 1-1 1h-1M3 13v4a1 1 0 0 0 1 1h1M3 13h18"/><circle cx="7.5" cy="17.5" r="1.8"/><circle cx="16.5" cy="17.5" r="1.8"/></svg></div>
-        <h3>Prepaid transfer</h3>
-        <p>A licensed driver takes you to your stay at a fixed price for your area, paid before you fly.</p>
-      </article>
-      <article class="card feature reveal">
         <div class="card-icon"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 19V6"/><path d="M3 14h18v5"/><path d="M21 14v-2.5A2.5 2.5 0 0 0 18.5 9H11v5"/><circle cx="7" cy="11" r="1.8"/></svg></div>
         <h3>A first stay</h3>
-        <p>A hostel bed, homestay or motel for as long as you need to find your feet, confirmed only once it&rsquo;s really booked.</p>
+        <p>A hostel bed, homestay or motel, confirmed only once it&rsquo;s really booked.</p>
       </article>
       <article class="card feature reveal">
         <div class="card-icon"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg></div>
         <h3>Rooms viewed for you</h3>
-        <p>Send us a listing. We view it on video and check the landlord, the photos and the bond.</p>
-      </article>
-      <article class="card feature reveal">
-        <div class="card-icon"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><polyline points="9 15 11 17 15 13"/></svg></div>
-        <h3>A renter pack</h3>
-        <p>Upload your documents once. We check them so landlords can trust you.</p>
-      </article>
-      <article class="card feature reveal">
-        <div class="card-icon"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></div>
-        <h3>Real people</h3>
-        <p>Chat with our team in the app. They reply as soon as they can, and it&rsquo;s never a chatbot.</p>
-      </article>
-      <article class="card feature reveal">
-        <div class="card-icon"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
-        <h3>Your language</h3>
-        <p>The app speaks English, <span lang="hi">हिंदी</span>, <span lang="pa">ਪੰਜਾਬੀ</span> and <span lang="zh">中文</span>.</p>
+        <p>We view listings on video and check the landlord, the photos and the bond.</p>
       </article>
     </div>
+    <p class="more reveal"><a class="text-link" href="/what-you-get/">See everything you get</a></p>
   </div>
 </section>
 
 <section class="section section--soft showcase" id="app">
   <div class="container">
-    <div class="section-head center reveal">
-      <p class="eyebrow">The app</p>
-      <h2>Clear, calm and made for your first weeks.</h2>
-    </div>
-
     <div class="showcase-row">
       <div class="showcase-copy reveal">
-        <h3>Your plan, one step at a time</h3>
-        <p>See what&rsquo;s done and what&rsquo;s next: your flight, your first stay and your renter pack. A boarding pass keeps your trip front and centre.</p>
+        <p class="eyebrow">The app</p>
+        <h3>Clear, calm and made for your first weeks.</h3>
+        <p>Your plan, your rooms, your documents and your team, in one simple app. Available in English, <span lang="hi">हिंदी</span>, <span lang="pa">ਪੰਜਾਬੀ</span> and <span lang="zh">中文</span>.</p>
+        <p class="text-link-row"><a class="text-link" href="/the-app/">See the app</a></p>
       </div>
-      <figure class="phone phone--feature reveal">
-        <picture>
-          <source media="(prefers-color-scheme: dark)" srcset="/assets/img/app-dark-home.jpg" />
-          <img src="/assets/img/app-light-home.jpg" width="536" height="1160" alt="The SETL home screen with a boarding pass and a Getting ready checklist." loading="lazy" />
-        </picture>
-      </figure>
-    </div>
-
-    <div class="showcase-row showcase-row--flip">
-      <div class="showcase-copy reveal">
-        <h3>Rooms we&rsquo;ve actually looked at</h3>
-        <p>Paste a link from Trade Me, Facebook or anywhere else. We go and look, on video, and tick off the landlord, the photos and the bond before you decide.</p>
+      <div class="duo duo--home reveal">
+        <figure class="phone phone--duo">
+          <picture>
+            <source media="(prefers-color-scheme: dark)" srcset="/assets/img/app-dark-home.jpg" />
+            <img src="/assets/img/app-light-home.jpg" width="536" height="1160" alt="The SETL home screen with a boarding pass." loading="lazy" />
+          </picture>
+        </figure>
+        <figure class="phone phone--duo">
+          <picture>
+            <source media="(prefers-color-scheme: dark)" srcset="/assets/img/app-dark-rooms.jpg" />
+            <img src="/assets/img/app-light-rooms.jpg" width="536" height="1160" alt="The SETL rooms screen with checks ticked." loading="lazy" />
+          </picture>
+        </figure>
       </div>
-      <figure class="phone phone--feature reveal">
-        <picture>
-          <source media="(prefers-color-scheme: dark)" srcset="/assets/img/app-dark-rooms.jpg" />
-          <img src="/assets/img/app-light-rooms.jpg" width="536" height="1160" alt="The SETL rooms screen showing a viewed room with checks ticked." loading="lazy" />
-        </picture>
-      </figure>
-    </div>
-
-    <div class="showcase-row">
-      <div class="showcase-copy reveal">
-        <h3>Real people, in your language</h3>
-        <p>Ask the team anything about your arrival, your stay or finding a room. Our people write back, and the app works in English, <span lang="hi">हिंदी</span>, <span lang="pa">ਪੰਜਾਬੀ</span> and <span lang="zh">中文</span>.</p>
-      </div>
-      <figure class="phone phone--feature reveal">
-        <picture>
-          <source media="(prefers-color-scheme: dark)" srcset="/assets/img/app-dark-chat.jpg" />
-          <img src="/assets/img/app-light-chat.jpg" width="536" height="1160" alt="The SETL chat between a student and the team." loading="lazy" />
-        </picture>
-      </figure>
-    </div>
-
-    <div class="showcase-row showcase-row--flip">
-      <div class="showcase-copy reveal">
-        <h3>A renter pack landlords trust</h3>
-        <p>Upload your passport, visa, enrolment letter and proof of funds once. We check them and, only if you ask, share a verified reference with a landlord. Never the documents themselves.</p>
-      </div>
-      <figure class="phone phone--feature reveal">
-        <img src="/assets/img/app-dark-profile.jpg" width="536" height="1160" alt="The SETL renter pack showing which documents are verified, checking or still to add." loading="lazy" />
-      </figure>
     </div>
   </div>
 </section>
@@ -272,35 +230,20 @@
       <article class="promise reveal">
         <div class="promise-icon"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
         <h3>We never hold your bond or rent</h3>
-        <p>Your bond and rent never pass through us. We only take our package fee and, if you choose it, your prepaid transfer.</p>
+        <p>We only take our package fee and, if you choose it, your prepaid transfer.</p>
       </article>
       <article class="promise reveal">
         <div class="promise-icon"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
         <h3>&ldquo;Confirmed&rdquo; means booked</h3>
-        <p>We only mark your first stay as confirmed once it is really booked. Until then, we&rsquo;ll say so.</p>
+        <p>We only mark your first stay as confirmed once it is really booked.</p>
       </article>
       <article class="promise reveal">
         <div class="promise-icon"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7"/><polyline points="3 4 3 10 9 10"/></svg></div>
         <h3>A refund if we can&rsquo;t confirm a stay</h3>
-        <p>If we can&rsquo;t confirm a stay for you before you fly, we refund our fee.</p>
-      </article>
-      <article class="promise reveal">
-        <div class="promise-icon"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 13l1.6-4.4a2 2 0 0 1 1.9-1.3h11a2 2 0 0 1 1.9 1.3L21 13v4a1 1 0 0 1-1 1h-1M3 13v4a1 1 0 0 0 1 1h1M3 13h18"/><circle cx="7.5" cy="17.5" r="1.8"/><circle cx="16.5" cy="17.5" r="1.8"/></svg></div>
-        <h3>Licensed drivers only</h3>
-        <p>Every prepaid transfer is driven by a licensed driver, at a price fixed for your area.</p>
-      </article>
-      <article class="promise reveal">
-        <div class="promise-icon"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-        <h3>Your documents stay private</h3>
-        <p>Only you and our team can open them. Once we&rsquo;ve checked one, we delete the copy and keep only the result.</p>
-      </article>
-      <article class="promise reveal">
-        <div class="promise-icon"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg></div>
-        <h3>Delete your account any time</h3>
-        <p>In the app, in a couple of taps. It removes your account, documents, plan and chat from SETL.</p>
+        <p>If we can&rsquo;t confirm a stay before you fly, we refund our fee.</p>
       </article>
     </div>
-    <p class="honest reveal">We won&rsquo;t promise you a specific flat. We promise a confirmed first stay and honest help finding the rest.</p>
+    <p class="more more--light reveal"><a class="text-link text-link--light" href="/promises/">Read all our promises</a></p>
   </div>
 </section>
 
@@ -312,10 +255,6 @@
     </div>
     <div class="faq">
       <details class="reveal">
-        <summary>Who is SETL for?</summary>
-        <p>International students and other newcomers arriving in Auckland, New Zealand, who want a calm first week instead of a stressful one. You need to be 18 or older.</p>
-      </details>
-      <details class="reveal">
         <summary>Do you guarantee me a specific flat?</summary>
         <p>No, and we won&rsquo;t pretend to. We book your first stay and confirm it before you fly. If we can&rsquo;t, we refund our fee. Finding a longer-term room happens with you, using video viewings and landlord checks.</p>
       </details>
@@ -324,26 +263,11 @@
         <p>We never hold your bond or rent. You pay our package fee and, if you choose it, a prepaid airport transfer. Your stay is paid to the host. The app shows every amount before you confirm.</p>
       </details>
       <details class="reveal">
-        <summary>What does SETL cost?</summary>
-        <p>A fixed package fee, plus your stay (paid to the host) and your ride (fixed for prepaid transfers). We&rsquo;re finalising launch prices, and you&rsquo;ll always see them in the app before you confirm anything.</p>
-      </details>
-      <details class="reveal">
-        <summary>What if my flight is delayed?</summary>
-        <p>We check your flight before you land and adjust your pickup if it&rsquo;s delayed, so nobody is left waiting.</p>
-      </details>
-      <details class="reveal">
-        <summary>Which languages does the app use?</summary>
-        <p>English, <span lang="hi">हिंदी</span> (Hindi), <span lang="pa">ਪੰਜਾਬੀ</span> (Punjabi) and <span lang="zh">中文</span> (Chinese). You can switch at any time.</p>
-      </details>
-      <details class="reveal">
-        <summary>Is my information safe?</summary>
-        <p>Your files are kept in private storage, and each person can only see their own information. We follow the New Zealand Privacy Act 2020. Read our <a href="/privacy/">privacy policy</a>, or <a href="/delete-account/">delete your account</a> whenever you like.</p>
-      </details>
-      <details class="reveal">
         <summary>When can I get the app?</summary>
         <p>The iPhone and Android apps are coming soon. Email <a href="mailto:hello@setl.nz?subject=SETL%20early%20access">hello@setl.nz</a> to join the early-access list.</p>
       </details>
     </div>
+    <p class="more reveal"><a class="text-link" href="/faq/">See all questions</a></p>
   </div>
 </section>
 
@@ -368,14 +292,15 @@
         <p><a href="mailto:hello@setl.nz">hello@setl.nz</a></p>
       </div>
       <nav class="footer-col" aria-label="Product">
-        <h2>Product</h2>
-        <a href="/#how">How it works</a>
-        <a href="/#included">What you get</a>
-        <a href="/#app">The app</a>
-        <a href="/#faq">FAQ</a>
+        <h2>SETL</h2>
+        <a href="/how-it-works/">How it works</a>
+        <a href="/what-you-get/">What you get</a>
+        <a href="/the-app/">The app</a>
+        <a href="/promises/">Promises</a>
       </nav>
       <nav class="footer-col" aria-label="Help">
         <h2>Help</h2>
+        <a href="/faq/">FAQ</a>
         <a href="/support/">Support</a>
         <a href="mailto:hello@setl.nz">Contact us</a>
         <a href="/delete-account/">Delete your account</a>

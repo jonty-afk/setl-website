@@ -29,3 +29,68 @@
     });
   }
 })();
+
+// Home page: a small plane flies along the dotted line, and the dots vanish behind it.
+(function () {
+  var svg = document.querySelector('.hero .hero-arc');
+  var plane = document.querySelector('.hero-plane');
+  var route = document.getElementById('hero-route');
+  var trail = document.getElementById('hero-trail-path');
+  if (!svg || !plane || !route || !trail) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (window.innerWidth <= 600) return; // on phones the line stays still
+
+  var length = route.getTotalLength();
+  var DURATION = 9000;
+  var DELAY = 600;
+  var TAIL = 10; // the dots vanish just behind the plane's tail, hidden under it
+  trail.setAttribute('stroke-dasharray', length + ' ' + length);
+
+  function ease(t) {
+    return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  }
+
+  // Turns a point on the line (in the drawing's own units) into page pixels, so the
+  // plane stays the same size even though the drawing is stretched to fit the hero.
+  function toPixels(point, matrix, host) {
+    return {
+      x: matrix.a * point.x + matrix.c * point.y + matrix.e - host.left,
+      y: matrix.b * point.x + matrix.d * point.y + matrix.f - host.top,
+    };
+  }
+
+  function frame(s, t) {
+    var matrix = svg.getScreenCTM();
+    if (!matrix) return;
+    var host = svg.parentNode.getBoundingClientRect();
+    var here = toPixels(route.getPointAtLength(s), matrix, host);
+    var ahead = toPixels(route.getPointAtLength(Math.min(s + 2, length)), matrix, host);
+    var angle = (Math.atan2(ahead.y - here.y, ahead.x - here.x) * 180) / Math.PI;
+    plane.style.transform =
+      'translate(' + here.x + 'px,' + here.y + 'px) translate(-50%,-50%) rotate(' + angle + 'deg)';
+    plane.style.opacity = String(Math.min(1, t / 0.06, (1 - t) / 0.06) * 0.95);
+    trail.setAttribute('stroke-dashoffset', String(-Math.max(0, s - TAIL)));
+  }
+
+  var start = null;
+  function tick(now) {
+    if (start === null) start = now + DELAY;
+    var raw = (now - start) / DURATION;
+    if (raw < 0) {
+      requestAnimationFrame(tick);
+      return;
+    }
+    if (raw >= 1) {
+      plane.style.opacity = '0';
+      // The plane has gone: bring the dotted line softly back.
+      svg.classList.add('is-hidden');
+      trail.setAttribute('stroke-dashoffset', '0');
+      void svg.getBoundingClientRect();
+      svg.classList.remove('is-hidden');
+      return;
+    }
+    frame(ease(raw) * length, raw);
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+})();
