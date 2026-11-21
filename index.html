@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>SETL: your new country, sorted before you fly</title>
-  <meta name="description" content="SETL meets you at the airport, books your first stay and helps you find a room you can trust. Starting in Auckland, New Zealand." />
+  <meta name="description" content="SETL meets you at the airport, books your first stay and helps you find a room you can trust, across New Zealand." />
   <link rel="canonical" href="https://setl.nz/" />
   
   <meta name="theme-color" content="#0A5BFF" />
@@ -19,7 +19,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="SETL" />
   <meta property="og:title" content="SETL: your new country, sorted before you fly" />
-  <meta property="og:description" content="SETL meets you at the airport, books your first stay and helps you find a room you can trust. Starting in Auckland, New Zealand." />
+  <meta property="og:description" content="SETL meets you at the airport, books your first stay and helps you find a room you can trust, across New Zealand." />
   <meta property="og:url" content="https://setl.nz/" />
   <meta property="og:image" content="https://setl.nz/assets/img/og-image.png" />
   <meta property="og:image:width" content="1200" />
@@ -28,7 +28,7 @@
 
   <link rel="stylesheet" href="/assets/css/site.css" />
   <script type="application/ld+json">
-    {"@context":"https://schema.org","@type":"Organization","name":"SETL","url":"https://setl.nz","logo":"https://setl.nz/assets/img/icon-512.png","email":"hello@setl.nz","description":"Arrival help for students and newcomers: airport meet and greet, a confirmed first stay and room finding."}
+    {"@context":"https://schema.org","@type":"Organization","name":"SETL","url":"https://setl.nz","logo":"https://setl.nz/assets/img/icon-512.png","email":"hello@setl.nz","description":"Arrival help for students and newcomers across New Zealand: airport meet and greet, a confirmed first stay and room finding.","areaServed":"NZ"}
   </script>
 </head>
 <body class="home">
@@ -72,7 +72,7 @@
   </div>
   <div class="container hero-grid">
     <div class="hero-copy">
-      <p class="pill"><span class="pill-dot"></span>Starting in Auckland, New Zealand</p>
+      <p class="pill"><span class="pill-dot"></span>Across New Zealand &middot; 6 student cities</p>
       <h1>Your new country, sorted before you fly.</h1>
       <p class="lead">SETL meets you at the airport, books your first stay and helps you find a room you can trust, so your first week isn&rsquo;t a gamble.</p>
       <div class="cta-row">
@@ -101,6 +101,24 @@
         <img src="/assets/img/app-dark-rooms.jpg" width="536" height="1160" alt="The SETL rooms screen: a room the team has viewed, with landlord, photo and bond checks ticked." />
       </figure>
     </div>
+  </div>
+</section>
+
+<section class="section section--soft coverage" id="coverage">
+  <div class="container">
+    <div class="section-head center reveal">
+      <p class="eyebrow">Nationwide</p>
+      <h2>Wherever you&rsquo;re studying in New Zealand.</h2>
+      <p class="lead">From Auckland to Dunedin, we meet you at the airport you land at, sort your first stay and help you find a room in your city.</p>
+    </div>
+    <ul class="chips chips--center reveal" aria-label="Cities we cover">
+      <li class="chip chip--lg">Auckland</li>
+      <li class="chip chip--lg">Hamilton</li>
+      <li class="chip chip--lg">Wellington</li>
+      <li class="chip chip--lg">Palmerston North</li>
+      <li class="chip chip--lg">Christchurch</li>
+      <li class="chip chip--lg">Dunedin</li>
+    </ul>
   </div>
 </section>
 
@@ -178,7 +196,7 @@
       <article class="card feature reveal">
         <div class="card-icon"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg></div>
         <h3>Welcome pack</h3>
-        <p>An AT HOP transport card and a local SIM, handed to you when you land.</p>
+        <p>A local transport card and a SIM, handed to you when you land.</p>
       </article>
       <article class="card feature reveal">
         <div class="card-icon"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 19V6"/><path d="M3 14h18v5"/><path d="M21 14v-2.5A2.5 2.5 0 0 0 18.5 9H11v5"/><circle cx="7" cy="11" r="1.8"/></svg></div>
@@ -290,6 +308,18 @@
         <input name="email" type="email" inputmode="email" autocomplete="email" maxlength="254" required placeholder="you@example.com" />
       </label>
       <label class="ea-field">
+        <span>Which city? <em>Optional</em></span>
+        <select name="city">
+          <option value="">Not sure yet</option>
+          <option value="auckland">Auckland</option>
+          <option value="hamilton">Hamilton</option>
+          <option value="wellington">Wellington</option>
+          <option value="palmerston-north">Palmerston North</option>
+          <option value="christchurch">Christchurch</option>
+          <option value="dunedin">Dunedin</option>
+        </select>
+      </label>
+      <label class="ea-field">
         <span>When are you flying? <em>Optional</em></span>
         <select name="flying">
           <option value="">Not sure yet</option>
@@ -324,7 +354,7 @@
           <img class="brand-tile" src="/assets/img/logo-tile.png" width="36" height="36" alt="" />
           <span class="brand-word">SETL</span>
         </a>
-        <p>Arrival help for students and newcomers. Starting in Auckland, New Zealand.</p>
+        <p>Arrival help for students and newcomers, across New Zealand.</p>
         <p><a href="mailto:hello@setl.nz">hello@setl.nz</a></p>
       </div>
       <nav class="footer-col" aria-label="Product">

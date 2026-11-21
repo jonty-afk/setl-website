@@ -2245,7 +2245,7 @@ body.page-brand .section:first-of-type {
 }
 .ea-fields {
   display: grid;
-  grid-template-columns: 1fr 1.2fr 1fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 14px;
 }
 .ea-field {

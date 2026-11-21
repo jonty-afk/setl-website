@@ -245,7 +245,12 @@
           'Content-Type': 'application/json',
           Prefer: 'return=minimal',
         },
-        body: JSON.stringify({ name: name, email: email, flying: form.elements.flying.value || null }),
+        body: JSON.stringify({
+          name: name,
+          email: email,
+          city: form.elements.city.value || null,
+          flying: form.elements.flying.value || null,
+        }),
       })
         .then(function (res) {
           // 409 means this email is already on the list: that's a success too.
