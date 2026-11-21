@@ -348,6 +348,7 @@ body.inner .site-header .nav-cta {
 }
 .hero-arc {
   transition: opacity 1.6s ease;
+  overflow: visible; /* the route runs just above the phones */
 }
 .hero-arc.is-hidden {
   opacity: 0;
