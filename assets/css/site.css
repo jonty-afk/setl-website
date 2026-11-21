@@ -343,6 +343,8 @@ body.inner .site-header .nav-cta {
   mask: url('/assets/img/plane.png') center / contain no-repeat;
   opacity: 0;
   will-change: transform, opacity;
+  /* Above the phones, so it stays visible all the way across. */
+  z-index: 5;
 }
 .hero-arc {
   transition: opacity 1.6s ease;
