@@ -2740,3 +2740,370 @@ body.inner .site-header .site-nav a.nav-cta:hover {
     text-align: left;
   }
 }
+
+/* ------------------------------------------------ "From the airport" page */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* City picker in the hero. */
+.route-chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 32px;
+}
+.route-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px 9px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.route-chip:hover {
+  background: rgba(255, 255, 255, 0.24);
+  transform: translateY(-1px);
+}
+.route-chip span {
+  padding: 2px 7px;
+  border-radius: 7px;
+  background: #fff;
+  color: var(--blue-600);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+}
+
+.route-section {
+  padding-top: 56px;
+}
+.route-city + .route-city {
+  margin-top: 88px;
+  padding-top: 72px;
+  border-top: 1px solid var(--line);
+}
+.route-city-head {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.route-code {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 68px;
+  height: 68px;
+  border-radius: 20px;
+  background: linear-gradient(150deg, #0a5bff, #062f9a);
+  color: #fff;
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  box-shadow: 0 10px 24px rgba(10, 91, 255, 0.28);
+}
+.route-city-head h2 {
+  margin: 0;
+  font-size: clamp(30px, 4vw, 42px);
+  letter-spacing: -0.035em;
+  line-height: 1.1;
+}
+.route-city-head p {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 17px;
+}
+
+/* The honest "there is no airport bus here" note. */
+.route-notice {
+  margin: 24px 0 0;
+  padding: 16px 18px;
+  border-radius: var(--radius-sm);
+  border: 1px solid color-mix(in srgb, #f08a24 45%, var(--line));
+  background: color-mix(in srgb, #f08a24 10%, var(--card));
+  font-size: 16px;
+}
+
+/* Cost, time, how to pay: four tiles. */
+.route-facts {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin: 28px 0 0;
+}
+.route-fact {
+  padding: 18px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-soft);
+  border: 1px solid var(--line);
+}
+.route-fact dt {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.route-fact dd {
+  margin: 6px 0 0;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+.route-fact p {
+  margin: 6px 0 0;
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+.route-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+  align-items: start;
+}
+.route-card,
+.route-panel {
+  padding: 26px;
+}
+.route-card h3,
+.route-panel h3 {
+  margin: 0;
+  font-size: 20px;
+}
+.route-tag {
+  display: inline-block;
+  margin: 0 0 10px !important;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--chip);
+  color: var(--blue) !important;
+  font-size: 12px !important;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.route-intro {
+  font-size: 15px !important;
+}
+
+/* The route line: stops are dots, legs are the coloured track between them. */
+.route {
+  --rail: 30px;
+  list-style: none;
+  margin: 22px 0 0;
+  padding: 0;
+}
+.route > li {
+  position: relative;
+  padding-left: var(--rail);
+}
+.route-stop {
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+.route-stop::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 5px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--card);
+  border: 4px solid var(--ink);
+  z-index: 1;
+}
+.route-stop--start::before,
+.route-stop--end::before {
+  background: var(--ink);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--ink) 14%, transparent);
+}
+.route-stop h4 {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.4;
+}
+.route-stop p,
+.route-leg p {
+  margin: 3px 0 0;
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.route-leg {
+  --leg: var(--blue);
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+.route-leg::before {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: -20px;
+  bottom: -8px;
+  width: 6px;
+  border-radius: 3px;
+  background: var(--leg);
+}
+.route-leg--bus {
+  --leg: #12a150;
+}
+.route-leg--orange {
+  --leg: #f47b20;
+}
+.route-leg--coach {
+  --leg: #8a5cf6;
+}
+.route-leg--shuttle,
+.route-leg--car {
+  --leg: #0fa3a3;
+}
+.route-leg--walk {
+  --leg: var(--muted);
+}
+.route-leg--walk::before {
+  background: repeating-linear-gradient(to bottom, var(--leg) 0 6px, transparent 6px 12px);
+}
+.route-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 12px 5px 9px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--leg) 14%, var(--card));
+  border: 1px solid color-mix(in srgb, var(--leg) 40%, transparent);
+  color: color-mix(in srgb, var(--leg) 72%, var(--ink));
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+.route-pill svg {
+  flex: none;
+}
+
+.route-panels {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+  align-items: start;
+}
+.route-areas {
+  list-style: none;
+  margin: 10px 0 0;
+  padding: 0;
+}
+.route-areas li {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 0;
+  border-top: 1px solid var(--line);
+}
+.route-areas li:first-child {
+  border-top: 0;
+}
+.route-areas h4 {
+  margin: 0;
+  font-size: 16px;
+}
+.route-areas p {
+  margin: 2px 0 0;
+  font-size: 14.5px;
+}
+.route-suburbs {
+  font-size: 13px !important;
+  font-weight: 600;
+  color: var(--blue-600) !important;
+}
+.route-fare {
+  flex: none;
+  margin: 0 !important;
+  font-size: 15px !important;
+  font-weight: 700;
+  color: var(--ink) !important;
+  white-space: nowrap;
+}
+.route-panel .tick-list {
+  margin-top: 14px;
+}
+.route-panel .tick-list li {
+  font-size: 15px;
+}
+.route-planner {
+  margin-top: 20px;
+}
+.route-sources {
+  margin: 22px 0 0;
+  font-size: 13.5px;
+  color: var(--muted);
+}
+@media (prefers-color-scheme: dark) {
+  .route-suburbs {
+    color: #8db5ff !important;
+  }
+  .route-tag {
+    color: #8db5ff !important;
+  }
+}
+@media (max-width: 900px) {
+  .route-facts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .route-panels {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 600px) {
+  .route-chips {
+    gap: 8px;
+  }
+  .route-chip {
+    font-size: 14px;
+    padding: 8px 13px 8px 8px;
+  }
+  .route-code {
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+    font-size: 16px;
+  }
+  .route-city + .route-city {
+    margin-top: 56px;
+    padding-top: 48px;
+  }
+  .route-cards {
+    grid-template-columns: 1fr;
+  }
+  .route-card,
+  .route-panel {
+    padding: 22px 20px;
+  }
+  .route-fact {
+    padding: 14px;
+  }
+  .route-fact dd {
+    font-size: 17px;
+  }
+  .route-areas li {
+    flex-direction: column;
+    gap: 4px;
+  }
+}
