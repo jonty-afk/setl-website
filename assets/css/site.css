@@ -2251,6 +2251,12 @@ body.page-brand .section:first-of-type {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 14px;
 }
+.ea-field--wide {
+  grid-column: 1 / -1;
+}
+.ea-done .ea-again {
+  margin-top: 6px;
+}
 .ea-field {
   display: grid;
   gap: 8px;
@@ -2499,5 +2505,147 @@ body.page-brand .section:first-of-type {
   .city-prices,
   .packages {
     grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ---------- Review fixes (Nov 2026) ---------- */
+
+/* The keyboard focus ring is white wherever the background is blue. */
+.hero :focus-visible,
+.page-hero--brand :focus-visible,
+.ea :focus-visible,
+.site-header:not(.is-solid) :focus-visible {
+  outline-color: #fff;
+}
+
+/* The header button keeps its blue on hover, so its white label stays readable. */
+.site-header .site-nav a.nav-cta:hover,
+body.inner .site-header .site-nav a.nav-cta:hover {
+  background: var(--blue-600);
+  color: #fff;
+}
+.site-header:not(.is-solid) .site-nav a.nav-cta:hover {
+  background: #e8efff;
+  color: var(--blue);
+}
+
+/* Small text on blue: bright enough to read. */
+.eyebrow--light {
+  color: #d6e4ff !important;
+}
+.hero .fine {
+  color: rgba(255, 255, 255, 0.9);
+}
+.ea-field em {
+  color: rgba(255, 255, 255, 0.85);
+}
+.ea-field input::placeholder {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+/* The phone menu scrolls when the screen is short (a phone held sideways). */
+@media (max-width: 960px) {
+  .site-nav {
+    max-height: calc(100dvh - var(--header-h));
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+}
+
+/* Founders on the home page, between the promises and the FAQ, with a line
+   above and below. Initials until the photos arrive. */
+.founders-section {
+  padding: 64px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.founders-section .section-head {
+  margin-bottom: 28px;
+}
+.founders-section .section-head h2 {
+  font-size: clamp(28px, 3.2vw, 38px);
+}
+.founders {
+  display: flex;
+  justify-content: center;
+  gap: 48px;
+  flex-wrap: wrap;
+}
+.founder {
+  text-align: center;
+}
+.founder-photo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  background: var(--chip);
+  color: var(--blue);
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  object-fit: cover;
+}
+.founder h3 {
+  margin: 10px 0 0;
+}
+.founder p {
+  margin: 0;
+  color: var(--muted);
+}
+
+/* Founders: a soft blue glow behind the section, and a slow ring around each photo. */
+.founders-section {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(60% 90% at 50% 0%, rgba(10, 91, 255, 0.10), transparent 70%),
+    var(--bg-soft);
+}
+@media (prefers-color-scheme: dark) {
+  .founders-section {
+    background:
+      radial-gradient(60% 90% at 50% 0%, rgba(76, 141, 255, 0.16), transparent 70%),
+      var(--bg-soft);
+  }
+}
+.founder-photo {
+  position: relative;
+  z-index: 0;
+}
+/* The ring: a blue arc that turns slowly, sitting just outside the circle. */
+.founder-photo::before {
+  content: '';
+  position: absolute;
+  inset: -5px;
+  z-index: -1;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, var(--blue), rgba(10, 91, 255, 0.05) 55%, var(--blue));
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 2px));
+  mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 2px));
+  animation: founder-ring 9s linear infinite;
+}
+.founder:nth-child(2) .founder-photo::before {
+  animation-delay: -4.5s;
+}
+.founder-photo {
+  transition: transform 0.3s ease;
+}
+.founder:hover .founder-photo {
+  transform: translateY(-3px);
+}
+@keyframes founder-ring {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .founder-photo::before {
+    animation: none;
+  }
+  .founder:hover .founder-photo {
+    transform: none;
   }
 }

@@ -269,3 +269,102 @@
     });
   });
 })();
+
+/* Employer list: the form on /employers/ for businesses that want SETL Jobs. */
+(function () {
+  var forms = document.querySelectorAll('form[data-employer]');
+  if (!forms.length) return;
+  var EMAIL = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+  var PHONE = /^[0-9+() -]{6,30}$/;
+
+  Array.prototype.forEach.call(forms, function (form) {
+    var wrap = form.parentNode;
+    var done = wrap.querySelector('.ea-done');
+    var again = wrap.querySelector('.ea-again');
+    var msg = form.querySelector('.ea-msg');
+    var button = form.querySelector('.ea-submit');
+    var fields = form.elements;
+    var checked = [fields.business, fields.phone, fields.email];
+
+    function showError(html, field) {
+      msg.innerHTML = html;
+      msg.hidden = false;
+      if (field) {
+        field.setAttribute('aria-invalid', 'true');
+        field.focus();
+      }
+    }
+    function clearError() {
+      msg.hidden = true;
+      checked.forEach(function (input) {
+        input.removeAttribute('aria-invalid');
+      });
+    }
+    function finish() {
+      form.hidden = true;
+      done.hidden = false;
+      done.focus();
+    }
+    checked.forEach(function (input) {
+      input.addEventListener('input', function () {
+        input.removeAttribute('aria-invalid');
+      });
+    });
+    // "Add another business": keep the contact details, clear the business.
+    again.addEventListener('click', function () {
+      fields.business.value = '';
+      fields.roles.value = '';
+      fields.type.value = '';
+      done.hidden = true;
+      form.hidden = false;
+      fields.business.focus();
+    });
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      clearError();
+      var business = fields.business.value.trim();
+      var phone = fields.phone.value.trim();
+      var email = fields.email.value.trim();
+      if (business.length < 2) return showError('Please add the business name.', fields.business);
+      if (!phone && !email) return showError('Please add a phone number or an email.', fields.phone);
+      if (phone && !PHONE.test(phone)) return showError('Please check the phone number.', fields.phone);
+      if (email && !EMAIL.test(email)) return showError('Please check the email address.', fields.email);
+      if (fields.website.value) return finish(); // a bot filled the hidden field
+
+      button.disabled = true;
+      button.textContent = 'Joining…';
+      fetch(form.dataset.endpoint + '/rest/v1/job_interest', {
+        method: 'POST',
+        headers: {
+          apikey: form.dataset.key,
+          'Content-Type': 'application/json',
+          Prefer: 'return=minimal',
+        },
+        body: JSON.stringify({
+          kind: 'employer',
+          business: business,
+          contact_name: fields.contact.value.trim() || null,
+          phone: phone || null,
+          email: email || null,
+          city: fields.city.value || null,
+          business_type: fields.type.value || null,
+          roles: fields.roles.value.trim() || null,
+        }),
+      })
+        .then(function (res) {
+          if (res.ok || res.status === 409) return finish();
+          throw new Error('status ' + res.status);
+        })
+        .catch(function () {
+          showError(
+            'Sorry, that didn&rsquo;t go through. Please try again, or email <a href="mailto:hello@setl.nz?subject=SETL%20Jobs%20for%20employers">hello@setl.nz</a>.',
+          );
+        })
+        .then(function () {
+          button.disabled = false;
+          button.textContent = 'Join the employer list';
+        });
+    });
+  });
+})();
