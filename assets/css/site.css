@@ -2669,6 +2669,12 @@ body.inner .site-header .site-nav a.nav-cta:hover {
 .stay-cities {
   align-items: start;
 }
+/* Two city cards side by side get too narrow to read on phones and tablets. */
+@media (max-width: 820px) {
+  .stay-cities {
+    grid-template-columns: 1fr;
+  }
+}
 .stay-list {
   list-style: none;
   margin: 12px 0 0;
