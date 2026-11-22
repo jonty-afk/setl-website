@@ -3107,3 +3107,38 @@ body.inner .site-header .site-nav a.nav-cta:hover {
     gap: 4px;
   }
 }
+
+/* Cities we have not opened yet. */
+.soon-tag {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--chip);
+  color: var(--blue);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+@media (prefers-color-scheme: dark) {
+  .soon-tag {
+    color: #8db5ff;
+  }
+}
+.chip--soon {
+  opacity: 0.85;
+  border-style: dashed;
+}
+.chip--soon small {
+  margin-left: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.city-soon-note {
+  margin: 14px 0 18px;
+}
