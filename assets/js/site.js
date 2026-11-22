@@ -1,3 +1,12 @@
+/* Never show setl.nz inside another site's frame. */
+if (window.top !== window.self) {
+  try {
+    window.top.location.replace(window.self.location.href);
+  } catch (e) {
+    document.documentElement.style.display = 'none';
+  }
+}
+
 // SETL website: a few small behaviours. No tracking, no external requests.
 (function () {
   var header = document.querySelector('.site-header');
@@ -234,7 +243,7 @@
       var email = emailInput.value.trim();
       if (!name) return showError('Please tell us your name.', nameInput);
       if (!EMAIL.test(email)) return showError('Please check your email address.', emailInput);
-      if (form.elements.company.value) return finish(); // a bot filled the hidden field
+      if (form.elements.hp_leave_empty.value) return finish(); // a bot filled the hidden field
 
       button.disabled = true;
       button.textContent = 'Joining…';
@@ -330,7 +339,7 @@
       if (!phone && !email) return showError('Please add a phone number or an email.', fields.phone);
       if (phone && !PHONE.test(phone)) return showError('Please check the phone number.', fields.phone);
       if (email && !EMAIL.test(email)) return showError('Please check the email address.', fields.email);
-      if (fields.website.value) return finish(); // a bot filled the hidden field
+      if (fields.hp_leave_empty.value) return finish(); // a bot filled the hidden field
 
       button.disabled = true;
       button.textContent = 'Joining…';

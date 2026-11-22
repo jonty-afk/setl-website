@@ -2649,3 +2649,88 @@ body.inner .site-header .site-nav a.nav-cta:hover {
     transform: none;
   }
 }
+
+/* Readable status tag (light mode) and pricing captions (dark mode). */
+.price-table caption {
+  color: var(--blue-600);
+}
+@media (prefers-color-scheme: dark) {
+  .price-table caption {
+    color: #8db5ff;
+  }
+}
+@media (prefers-color-scheme: light) {
+  .option-card--done .option-tag {
+    color: #157a3a;
+  }
+}
+
+/* "Where you could stay" page. */
+.stay-cities {
+  align-items: start;
+}
+.stay-list {
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+}
+.stay {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 0;
+  border-top: 1px solid var(--line);
+}
+.stay:first-child {
+  border-top: 0;
+}
+.stay h4 {
+  margin: 0;
+  font-size: 16px;
+}
+.stay h4 a {
+  color: var(--ink);
+  text-decoration: none;
+}
+.stay h4 a:hover {
+  color: var(--blue);
+  text-decoration: underline;
+}
+.stay-meta {
+  margin: 2px 0 0;
+  font-size: 13px;
+  color: var(--blue-600);
+  font-weight: 600;
+}
+.stay-note {
+  margin: 4px 0 0;
+  font-size: 14px;
+  color: var(--muted);
+}
+.stay-price {
+  margin: 0;
+  flex: 0 0 34%;
+  text-align: right;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+}
+.stay-fine {
+  margin-top: 40px;
+  font-size: 14px;
+  color: var(--muted);
+}
+@media (prefers-color-scheme: dark) {
+  .stay-meta {
+    color: #8db5ff;
+  }
+}
+@media (max-width: 600px) {
+  .stay {
+    flex-direction: column;
+    gap: 6px;
+  }
+  .stay-price {
+    text-align: left;
+  }
+}
