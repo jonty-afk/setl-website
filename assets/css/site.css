@@ -2721,6 +2721,72 @@ body.inner .site-header .site-nav a.nav-cta:hover {
   font-weight: 600;
   color: var(--ink);
 }
+/* Two sections that read as one: keep the gap between them small on every screen size. */
+.section.section--lead-in {
+  padding-bottom: 32px;
+}
+.section.section--follow {
+  padding-top: 0;
+}
+/* A section that carries on from the one above: no second helping of top space. */
+
+/* Our own photos and video for each kind of stay: a row you swipe sideways. */
+.stay-kind > h3:first-child {
+  margin-top: 0;
+}
+.stay-shots {
+  display: flex;
+  gap: 10px;
+  margin: -12px -12px 0;
+  padding: 0 0 4px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.stay-shots::-webkit-scrollbar {
+  display: none;
+}
+.stay-shot {
+  position: relative;
+  flex: 0 0 82%;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  scroll-snap-align: start;
+  background: var(--bg-soft);
+}
+.stay-shot img,
+.stay-shot video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.stay-play {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: var(--blue);
+  box-shadow: 0 6px 20px rgba(10, 91, 255, 0.45);
+}
+.stay-play::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 54%;
+  transform: translate(-50%, -50%);
+  border-style: solid;
+  border-width: 10px 0 10px 17px;
+  border-color: transparent transparent transparent #fff;
+}
+.card .stay-caption {
+  margin-top: 8px;
+  font-size: 13px;
+}
 .stay-fine {
   margin-top: 40px;
   font-size: 14px;
@@ -3141,4 +3207,15 @@ body.inner .site-header .site-nav a.nav-cta:hover {
 }
 .city-soon-note {
   margin: 14px 0 18px;
+}
+
+/* One package. */
+.packages--single {
+  max-width: 560px;
+  margin: 0 auto;
+}
+.package-fine {
+  margin-top: 18px;
+  font-size: 14px;
+  color: var(--muted);
 }
