@@ -1326,7 +1326,7 @@ body.inner .site-header .nav-cta {
 
 /* "Next" link at the bottom of each page. */
 .next {
-  padding: 0 0 96px;
+  padding: 40px 0 96px;
 }
 .next-card {
   display: flex;
@@ -2435,7 +2435,7 @@ body.page-brand .section:first-of-type {
   line-height: 1;
   color: var(--ink);
 }
-.package .package-price span {
+.package .package-price > span:not([data-nzd]) {
   margin-left: 8px;
   font-size: 15px;
   font-weight: 600;
@@ -3218,4 +3218,390 @@ body.inner .site-header .site-nav a.nav-cta:hover {
   margin-top: 18px;
   font-size: 14px;
   color: var(--muted);
+}
+
+/* Schedule a call: the two founders' buttons side by side, one small form under them. */
+.call-card {
+  max-width: 680px;
+  margin: 0 auto;
+}
+.call-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+}
+/* The Video call page: the two cards sit closer to the blue heading. */
+.section.section--lead-in.talk-section {
+  padding-top: 32px;
+}
+.call-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 4px;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--card);
+  box-shadow: var(--shadow-card);
+  color: var(--ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.call-btn:hover,
+.call-btn.is-on {
+  border-color: var(--blue);
+}
+.call-btn.is-on {
+  box-shadow: 0 0 0 1px var(--blue), var(--shadow-card);
+}
+.call-btn-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+.call-btn-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+/* The corner opposite the name: the founder's photo goes here. */
+.call-btn-photo {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  overflow: hidden;
+  border-radius: 50%;
+  background: var(--chip);
+  color: var(--blue);
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+.call-btn-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.call-btn-name {
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+.call-btn-role {
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--muted);
+}
+.call-btn-cta {
+  margin-top: 14px;
+  padding: 11px 12px;
+  border-radius: 999px;
+  background: var(--blue);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  text-align: center;
+}
+.call-btn:hover .call-btn-cta {
+  background: var(--blue-600);
+}
+.call-form {
+  margin-top: 16px;
+  padding: 8px 22px 22px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--card);
+  box-shadow: var(--shadow-card);
+}
+.call-form[hidden] {
+  display: none;
+}
+/* The form drops down from the cards when one is pressed. */
+.call-form:not([hidden]) {
+  animation: call-drop 0.28s ease;
+}
+@keyframes call-drop {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .call-form:not([hidden]) {
+    animation: none;
+  }
+}
+.call-form-title {
+  margin: 14px 0 0;
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--ink);
+}
+.call-form-label {
+  display: block;
+  margin: 16px 0 8px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--muted);
+}
+.call-input {
+  width: 100%;
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--bg-soft);
+  color: var(--ink);
+  font: inherit;
+  font-size: 16px;
+}
+.call-input[aria-invalid='true'] {
+  border-color: #d92d20;
+}
+.call-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.call-chip {
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.call-chip.is-on {
+  border-color: var(--blue);
+  background: var(--blue);
+  color: #fff;
+}
+.call-check {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 16px;
+  font-size: 15px;
+  color: var(--ink);
+}
+.call-check input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--blue);
+}
+.call-error {
+  margin: 14px 0 0;
+  color: #d92d20;
+  font-size: 14px;
+  font-weight: 600;
+}
+.call-send {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+  color: #fff;
+}
+.call-done {
+  margin: 12px 0 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  text-align: center;
+}
+.call-form-note {
+  margin: 12px 0 0;
+  font-size: 13px;
+  color: var(--muted);
+  text-align: center;
+}
+@media (max-width: 420px) {
+  /* Keep the tiles their full size and push them out toward the screen edges. */
+  .call-card {
+    margin-inline: -12px;
+  }
+  .call-buttons {
+    gap: 28px;
+  }
+  .call-btn {
+    padding: 16px 14px;
+  }
+  .call-btn-role {
+    font-size: 13px;
+  }
+  .call-btn-photo {
+    width: 44px;
+    height: 44px;
+    font-size: 14px;
+  }
+  .call-btn-name {
+    font-size: 18px;
+  }
+  .call-btn-cta {
+    font-size: 14px;
+    padding: 11px 6px;
+    white-space: nowrap;
+  }
+}
+.talk-grid {
+  margin-top: 48px;
+}
+
+/* The WhatsApp symbol in the top bar: opens the Video call page. Quiet on purpose:
+   same colour as the other menu links, no coloured circle. */
+.wa-ico {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+.site-nav .nav-wa,
+.header-wa {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border-radius: 50%;
+  color: inherit;
+  opacity: 0.92;
+}
+.header-wa:hover {
+  opacity: 1;
+}
+.nav-wa-text {
+  display: none;
+}
+.header-wa {
+  display: none;
+}
+@media (max-width: 960px) {
+  /* Phone: the symbol sits in the top bar beside the menu button... */
+  .header-wa {
+    display: inline-flex;
+    margin-left: auto;
+    margin-right: -12px;
+  }
+  /* ...and inside the menu it is a normal row with its name. */
+  .site-nav .nav-wa {
+    width: auto;
+    height: auto;
+    justify-content: flex-start;
+    gap: 10px;
+    padding: 14px 12px;
+    border-radius: 12px;
+  }
+  .nav-wa-text {
+    display: inline;
+  }
+}
+
+/* Currency switch: on the pricing page only, under the intro. SETL charges in NZ dollars;
+   other currencies are only "about" figures. */
+/* Pricing page: the currency pill sits in the top corner of the fee card, beside its label. */
+.package-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.cur-box.cur-box--card {
+  color: var(--blue);
+}
+.cur-box.cur-box--card .cur-select {
+  padding: 6px 28px 6px 12px;
+  font-size: 13px;
+  font-weight: 700;
+  background: var(--chip);
+  color: var(--blue);
+  border-color: transparent;
+}
+.cur-box {
+  position: relative;
+  display: inline-flex;
+}
+.cur-box::after {
+  content: '';
+  position: absolute;
+  right: 11px;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  margin-top: -5px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg);
+  pointer-events: none;
+}
+.cur-select {
+  appearance: none;
+  -webkit-appearance: none;
+  background: var(--card);
+  color: var(--ink);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  padding: 7px 28px 7px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  cursor: pointer;
+}
+.cur-select option {
+  color: #111;
+  background: #fff;
+}
+.currency-note {
+  margin: 14px 0 0;
+  font-size: 15px;
+  opacity: 0.85;
+  max-width: 640px;
+}
+.currency-note a {
+  color: inherit;
+  text-decoration: underline;
+}
+.nzd-both {
+  display: inline;
+}
+.nzd-both small {
+  display: block;
+  font-size: 0.45em;
+  font-weight: 500;
+  opacity: 0.75;
+  letter-spacing: 0;
+}
+
+.package .package-price [data-nzd] {
+  margin: 0;
+  font-size: inherit;
+  font-weight: inherit;
+  color: inherit;
+}
+.package .package-price .nzd-both {
+  display: block;
+}
+.package .package-price .nzd-both small {
+  margin-top: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.cur-box {
+  color: var(--ink);
 }

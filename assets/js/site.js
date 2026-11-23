@@ -7,7 +7,8 @@ if (window.top !== window.self) {
   }
 }
 
-// SETL website: a few small behaviours. No tracking, no external requests.
+// SETL website: a few small behaviours. No tracking. The only outside request is the exchange-rate
+// lookup, and only after a visitor picks a currency themselves.
 (function () {
   var header = document.querySelector('.site-header');
   var toggle = document.querySelector('.nav-toggle');
@@ -376,4 +377,278 @@ if (window.top !== window.self) {
         });
     });
   });
+})();
+
+// Schedule a call (Video call page). Pressing a founder's button opens one small
+// form under the two buttons. "Send on WhatsApp" does two things: it saves the
+// request to SETL's database (which emails the team), and it opens WhatsApp with
+// the details already typed, so the visitor only has to press send there.
+(function () {
+  var sched = document.querySelector('[data-call-sched]');
+  if (!sched) return;
+  var picks = sched.querySelectorAll('[data-call-pick]');
+  var form = sched.querySelector('.call-form');
+  var title = sched.querySelector('[data-call-title]');
+  var nameInput = sched.querySelector('[data-name-input]');
+  var waInput = sched.querySelector('[data-wa-input]');
+  var day = sched.querySelector('[data-day]');
+  var parents = sched.querySelector('[data-parents]');
+  var trap = sched.querySelector('[data-hp]');
+  var error = sched.querySelector('[data-call-error]');
+  var done = sched.querySelector('[data-call-done]');
+  var send = sched.querySelector('[data-send]');
+  if (!form || !send || !picks.length) return;
+  var PHONE = /^[0-9+() -]{6,30}$/;
+  var current = null;
+
+  var zone = '';
+  try {
+    zone = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+  } catch (e) {}
+  if (!/^[A-Za-z0-9_+\/-]{1,60}$/.test(zone)) zone = '';
+
+  function pad(n) {
+    return n < 10 ? '0' + n : String(n);
+  }
+  var now = new Date();
+  if (day) day.min = now.getFullYear() + '-' + pad(now.getMonth() + 1) + '-' + pad(now.getDate());
+
+  function niceDay(value) {
+    var parts = value.split('-');
+    if (parts.length !== 3) return '';
+    var d = new Date(Number(parts[0]), Number(parts[1]) - 1, Number(parts[2]));
+    try {
+      return d.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' });
+    } catch (e) {
+      return value;
+    }
+  }
+  function timeChosen() {
+    var chip = form.querySelector('.call-chip.is-on');
+    return chip ? chip.getAttribute('data-value') : 'any time';
+  }
+
+  // Keeps the WhatsApp link in step with what has been chosen and typed.
+  function update() {
+    if (!current) return;
+    var who = current.getAttribute('data-name');
+    var text = 'Hi ' + who + ', I would like a video call about SETL.';
+    var name = nameInput.value.trim();
+    if (name) text += ' My name is ' + name + '.';
+    text += ' Day: ' + (day.value ? niceDay(day.value) : 'any day') + '.';
+    text += ' Time: ' + timeChosen() + (zone ? ' (' + zone + ' time)' : ' (my local time)') + '.';
+    if (parents.checked) text += ' My parents will join the call.';
+    send.href = 'https://wa.me/' + current.getAttribute('data-number') + '?text=' + encodeURIComponent(text);
+    send.textContent = 'Send to ' + who + ' on WhatsApp';
+  }
+
+  function clearError() {
+    error.hidden = true;
+    nameInput.removeAttribute('aria-invalid');
+    waInput.removeAttribute('aria-invalid');
+  }
+  function showError(message, input) {
+    error.textContent = message;
+    error.hidden = false;
+    input.setAttribute('aria-invalid', 'true');
+    input.focus();
+  }
+
+  picks.forEach(function (pick) {
+    pick.addEventListener('click', function () {
+      var closing = current === pick && !form.hidden;
+      current = closing ? null : pick;
+      form.hidden = closing;
+      picks.forEach(function (other) {
+        var on = other === current;
+        other.classList.toggle('is-on', on);
+        other.setAttribute('aria-expanded', String(on));
+      });
+      if (closing) return;
+      title.textContent = 'Video call with ' + pick.getAttribute('data-name');
+      done.hidden = true;
+      clearError();
+      update();
+    });
+  });
+
+  form.addEventListener('click', function (event) {
+    var chip = event.target.closest('.call-chip');
+    if (!chip) return;
+    form.querySelectorAll('.call-chip').forEach(function (other) {
+      var on = other === chip;
+      other.classList.toggle('is-on', on);
+      other.setAttribute('aria-pressed', String(on));
+    });
+    update();
+  });
+  form.addEventListener('input', function () {
+    clearError();
+    update();
+  });
+  form.addEventListener('change', update);
+
+  send.addEventListener('click', function (event) {
+    clearError();
+    var name = nameInput.value.trim();
+    var whatsapp = waInput.value.trim();
+    if (!current) return event.preventDefault();
+    if (!name) {
+      event.preventDefault();
+      return showError('Please tell us your name.', nameInput);
+    }
+    if (!PHONE.test(whatsapp)) {
+      event.preventDefault();
+      return showError('Please check your WhatsApp number. Include the country code, like +91.', waInput);
+    }
+    update();
+    done.hidden = false;
+    if (trap && trap.value) return; // a bot filled the hidden field: save nothing
+
+    // Save the request; the database then emails the team. This must never block
+    // WhatsApp opening, so nothing waits on it and a failure is silent here: the
+    // WhatsApp message still reaches us.
+    try {
+      fetch(sched.getAttribute('data-endpoint') + '/rest/v1/call_requests', {
+        method: 'POST',
+        keepalive: true,
+        headers: {
+          apikey: sched.getAttribute('data-key'),
+          'Content-Type': 'application/json',
+          Prefer: 'return=minimal',
+        },
+        body: JSON.stringify({
+          name: name,
+          whatsapp: whatsapp,
+          with_whom: current.getAttribute('data-id'),
+          day: day.value || null,
+          time_of_day: timeChosen(),
+          time_zone: zone || null,
+          parents: parents.checked,
+        }),
+      }).catch(function () {});
+    } catch (e) {}
+  });
+})();
+
+// Currency switch. Prices are written in NZ dollars (what SETL charges). A visitor can see
+// them as "about" figures in their own currency. Rates are baked in at build time and, if the
+// visitor picks a currency, refreshed from the free daily rate service (nothing personal sent).
+(function () {
+  var selects = document.querySelectorAll('[data-currency]');
+  var holder = document.body;
+  if (!selects.length || !holder.dataset.currencyData) return;
+  var data;
+  try { data = JSON.parse(holder.dataset.currencyData); } catch (e) { return; }
+  var rates = data.rates;
+  var ratesDate = data.date;
+  var info = {};
+  data.list.forEach(function (c) { info[c.c] = c; });
+
+  function store(key, value) {
+    try { if (value === null) localStorage.removeItem(key); else localStorage.setItem(key, value); } catch (e) {}
+  }
+  function load(key) {
+    try { return localStorage.getItem(key); } catch (e) { return null; }
+  }
+
+  function nice(v) {
+    if (v >= 100) {
+      var m = Math.pow(10, Math.floor(Math.log10(v)) - 2);
+      return Math.round(v / m) * m;
+    }
+    if (v >= 10) return Math.round(v);
+    return Math.round(v * 10) / 10;
+  }
+  function plain(n) { return '$' + n.toLocaleString('en-NZ'); }
+  function fmt(n, code) {
+    var c = info[code];
+    if (code === 'NZD' || !c || !rates[code]) return plain(n);
+    return c.s + nice(n * rates[code]).toLocaleString('en-US');
+  }
+
+  function render(code) {
+    document.querySelectorAll('[data-nzd]').forEach(function (el) {
+      var from = Number(el.dataset.nzd);
+      var to = el.dataset.nzdTo ? Number(el.dataset.nzdTo) : null;
+      var text = fmt(from, code);
+      if (to !== null) {
+        var end = fmt(to, code);
+        if (code !== 'NZD' && info[code]) end = end.replace(info[code].s, '');
+        text += '\u2013' + end;
+      }
+      if (code !== 'NZD' && el.hasAttribute('data-both')) {
+        el.classList.add('nzd-both');
+        el.textContent = text;
+        var small = document.createElement('small');
+        small.textContent = 'about, you pay NZ' + plain(from);
+        el.appendChild(small);
+      } else {
+        el.classList.remove('nzd-both');
+        el.textContent = code === 'NZD' ? text : '\u2248 ' + text;
+      }
+    });
+    selects.forEach(function (s) { s.value = code; });
+    document.documentElement.setAttribute('data-currency-now', code);
+    var note = document.querySelector('[data-currency-note]');
+    if (note) {
+      if (code === 'NZD' || !info[code]) {
+        note.hidden = true;
+      } else {
+        note.hidden = false;
+        note.textContent = '';
+        note.append(
+          'Shown in ' + info[code].n + ' as an estimate, using 1 NZ$ = ' + (rates[code] < 10 ? rates[code].toFixed(2) : Math.round(rates[code] * 100) / 100).toLocaleString('en-US') +
+          ' ' + code + ' (rate of ' + ratesDate + '). You pay in NZ dollars, so the final amount in your own money can differ a little. Rates by '
+        );
+        var a = document.createElement('a');
+        a.href = 'https://www.exchangerate-api.com';
+        a.rel = 'noopener';
+        a.textContent = 'Exchange Rate API';
+        note.append(a, '.');
+      }
+    }
+  }
+
+  // Refresh the rates from the live service, at most twice a day, and only after the visitor chose.
+  function refresh(code) {
+    var cached = null;
+    try { cached = JSON.parse(load('setl.rates') || 'null'); } catch (e) {}
+    var fresh = cached && cached.at && Date.now() - cached.at < 12 * 3600 * 1000;
+    if (fresh) {
+      rates = Object.assign({}, rates, cached.rates);
+      ratesDate = cached.date;
+      render(code);
+      return;
+    }
+    fetch(data.url, { cache: 'no-store' })
+      .then(function (r) { return r.json(); })
+      .then(function (live) {
+        if (!live || live.result !== 'success' || !live.rates) return;
+        var next = {};
+        Object.keys(rates).forEach(function (k) { if (live.rates[k]) next[k] = live.rates[k]; });
+        rates = Object.assign({}, rates, next);
+        ratesDate = new Date(live.time_last_update_utc).toISOString().slice(0, 10);
+        store('setl.rates', JSON.stringify({ at: Date.now(), date: ratesDate, rates: next }));
+        render(load('setl.currency') || code);
+      })
+      .catch(function () {});
+  }
+
+  function choose(code, picked) {
+    if (code !== 'NZD' && !info[code]) code = 'NZD';
+    store('setl.currency', code);
+    if (picked) store('setl.currency.picked', '1');
+    render(code);
+    if (code !== 'NZD' && load('setl.currency.picked')) refresh(code);
+  }
+
+  selects.forEach(function (s) {
+    s.addEventListener('change', function () { choose(s.value, true); });
+  });
+
+  // Always starts in NZ dollars, what SETL really charges, unless the visitor chose another currency before.
+  var saved = load('setl.currency') || 'NZD';
+  render(saved);
+  if (saved !== 'NZD' && load('setl.currency.picked')) refresh(saved);
 })();

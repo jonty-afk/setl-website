@@ -9,7 +9,7 @@
   
   <meta name="theme-color" content="#0A5BFF" />
   <meta name="color-scheme" content="light dark" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; base-uri 'self'; form-action 'self'; connect-src 'self' https://ozolfqmptcpiuacbvssy.supabase.co; object-src 'none'" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; base-uri 'self'; form-action 'self'; connect-src 'self' https://ozolfqmptcpiuacbvssy.supabase.co https://open.er-api.com; object-src 'none'" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
 
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
@@ -26,12 +26,12 @@
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
 
-  <link rel="stylesheet" href="/assets/css/site.css" />
+  <link rel="stylesheet" href="/assets/css/site.css?v=d78a850f50" />
   <script type="application/ld+json">
     {"@context":"https://schema.org","@type":"Organization","name":"SETL","url":"https://setl.nz","logo":"https://setl.nz/assets/img/icon-512.png","email":"hello@setl.nz","description":"Arrival help for students and newcomers in Auckland and Hamilton, with more cities soon: airport meet and greet, a confirmed first stay and room finding.","areaServed":"NZ"}
   </script>
 </head>
-<body class="inner">
+<body class="inner" data-currency-data="{&quot;date&quot;:&quot;2026-11-23&quot;,&quot;url&quot;:&quot;https://open.er-api.com/v6/latest/NZD&quot;,&quot;rates&quot;:{&quot;NZD&quot;:1,&quot;INR&quot;:50.813,&quot;CNY&quot;:3.6545,&quot;PHP&quot;:34.9856,&quot;NPR&quot;:81.3047,&quot;LKR&quot;:182.2535,&quot;BDT&quot;:68.1986,&quot;PKR&quot;:151.5624,&quot;VND&quot;:14030.8617,&quot;IDR&quot;:10012.1233,&quot;THB&quot;:18.6119,&quot;MYR&quot;:2.2555,&quot;SGD&quot;:0.7067,&quot;HKD&quot;:4.2942,&quot;JPY&quot;:86.9825,&quot;KRW&quot;:735.7035,&quot;AED&quot;:2.0103,&quot;USD&quot;:0.5474,&quot;GBP&quot;:0.4183,&quot;EUR&quot;:0.4992},&quot;list&quot;:[{&quot;c&quot;:&quot;INR&quot;,&quot;s&quot;:&quot;₹&quot;,&quot;n&quot;:&quot;Indian rupee&quot;},{&quot;c&quot;:&quot;CNY&quot;,&quot;s&quot;:&quot;CN¥&quot;,&quot;n&quot;:&quot;Chinese yuan&quot;},{&quot;c&quot;:&quot;PHP&quot;,&quot;s&quot;:&quot;₱&quot;,&quot;n&quot;:&quot;Philippine peso&quot;},{&quot;c&quot;:&quot;NPR&quot;,&quot;s&quot;:&quot;NPR &quot;,&quot;n&quot;:&quot;Nepali rupee&quot;},{&quot;c&quot;:&quot;LKR&quot;,&quot;s&quot;:&quot;LKR &quot;,&quot;n&quot;:&quot;Sri Lankan rupee&quot;},{&quot;c&quot;:&quot;BDT&quot;,&quot;s&quot;:&quot;৳&quot;,&quot;n&quot;:&quot;Bangladeshi taka&quot;},{&quot;c&quot;:&quot;PKR&quot;,&quot;s&quot;:&quot;PKR &quot;,&quot;n&quot;:&quot;Pakistani rupee&quot;},{&quot;c&quot;:&quot;VND&quot;,&quot;s&quot;:&quot;₫&quot;,&quot;n&quot;:&quot;Vietnamese dong&quot;},{&quot;c&quot;:&quot;IDR&quot;,&quot;s&quot;:&quot;Rp&quot;,&quot;n&quot;:&quot;Indonesian rupiah&quot;},{&quot;c&quot;:&quot;THB&quot;,&quot;s&quot;:&quot;฿&quot;,&quot;n&quot;:&quot;Thai baht&quot;},{&quot;c&quot;:&quot;MYR&quot;,&quot;s&quot;:&quot;RM&quot;,&quot;n&quot;:&quot;Malaysian ringgit&quot;},{&quot;c&quot;:&quot;SGD&quot;,&quot;s&quot;:&quot;S$&quot;,&quot;n&quot;:&quot;Singapore dollar&quot;},{&quot;c&quot;:&quot;HKD&quot;,&quot;s&quot;:&quot;HK$&quot;,&quot;n&quot;:&quot;Hong Kong dollar&quot;},{&quot;c&quot;:&quot;JPY&quot;,&quot;s&quot;:&quot;¥&quot;,&quot;n&quot;:&quot;Japanese yen&quot;},{&quot;c&quot;:&quot;KRW&quot;,&quot;s&quot;:&quot;₩&quot;,&quot;n&quot;:&quot;South Korean won&quot;},{&quot;c&quot;:&quot;AED&quot;,&quot;s&quot;:&quot;AED &quot;,&quot;n&quot;:&quot;UAE dirham&quot;},{&quot;c&quot;:&quot;USD&quot;,&quot;s&quot;:&quot;US$&quot;,&quot;n&quot;:&quot;US dollar&quot;},{&quot;c&quot;:&quot;GBP&quot;,&quot;s&quot;:&quot;£&quot;,&quot;n&quot;:&quot;British pound&quot;},{&quot;c&quot;:&quot;EUR&quot;,&quot;s&quot;:&quot;€&quot;,&quot;n&quot;:&quot;Euro&quot;}]}">
   <a class="skip-link" href="#main">Skip to content</a>
 
   <header class="site-header" id="top">
@@ -41,6 +41,7 @@
         <img class="brand-tile brand-tile--solid" src="/assets/img/logo-tile.png" width="36" height="36" alt="" />
         <span class="brand-word">SETL</span>
       </a>
+      <a class="header-wa" href="/talk/" aria-label="Schedule a video call"><svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu">
         <span></span><span></span><span></span>
       </button>
@@ -53,6 +54,7 @@
         <a href="/promises/">Promises</a>
         <a href="/faq/">FAQ</a>
         <a href="/support/">Support</a>
+        <a class="nav-wa" href="/talk/" aria-label="Schedule a video call" title="Schedule a video call"><svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg><span class="nav-wa-text">Video call</span></a>
         <a class="btn btn-sm btn-primary nav-cta" href="/early-access/">Get early access</a>
       </nav>
     </div>
@@ -118,6 +120,7 @@
         <a href="/from-the-airport/">From the airport</a>
         <a href="/the-app/">The app</a>
         <a href="/promises/">Promises</a>
+        <a href="/talk/">Video call</a>
         <a href="/employers/">For employers</a>
       </nav>
       <nav class="footer-col" aria-label="Help">
@@ -139,6 +142,6 @@
     </div>
   </footer>
 
-  <script src="/assets/js/site.js" defer></script>
+  <script src="/assets/js/site.js?v=5250aa981a" defer></script>
 </body>
 </html>
