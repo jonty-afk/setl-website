@@ -26,7 +26,7 @@
   <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
 
-  <link rel="stylesheet" href="/assets/css/site.css?v=edcdd4d147" />
+  <link rel="stylesheet" href="/assets/css/site.css?v=e5f33e0a7c" />
   <script type="application/ld+json">
     {"@context":"https://schema.org","@type":"Organization","name":"SETL","url":"https://setl.nz","logo":"https://setl.nz/assets/img/icon-512.png","email":"hello@setl.nz","description":"Arrival help for students and newcomers in Auckland and Hamilton, with more cities soon: airport meet and greet, a confirmed first stay and room finding.","areaServed":"NZ"}
   </script>
@@ -71,6 +71,7 @@
     <p class="eyebrow eyebrow--light">For hostels, motels and property managers</p>
     <h1>New students need a bed. You have the beds.</h1>
     <p class="lead">SETL Limited is an Auckland company that looks after international students in their first weeks in New Zealand. We book their first stay, arrange their ride from the airport and help them find a long-term room.</p>
+    <p class="partner-hero-cta"><a class="btn btn-light btn-lg" href="#enquire">Send an enquiry</a></p>
   </div>
 </section>
 
@@ -114,11 +115,84 @@
   </div>
 </section>
 
-<section class="cta-band cta-band--tight">
+<section class="cta-band cta-band--tight" id="enquire">
   <div class="container cta-inner reveal">
     <h2>Have rooms that suit students?</h2>
-    <p>Tell us a little about your place and we&rsquo;ll get back to you.</p>
-    <a class="btn btn-light btn-lg" href="mailto:hello@setl.nz?subject=Partnering%20with%20SETL">Email hello@setl.nz</a>
+    <p>Tell us a little about your place. It takes a minute, and we&rsquo;ll get back to you.</p>
+    <div class="ea">
+  <form class="ea-form" data-partner data-endpoint="https://ozolfqmptcpiuacbvssy.supabase.co" data-key="sb_publishable_y_thPPHE8sic3YQtCs-EeA_pjM5WtSy" novalidate>
+    <div class="ea-fields">
+      <label class="ea-field">
+        <span>Name of your place</span>
+        <input name="place" type="text" autocomplete="organization" maxlength="120" required placeholder="e.g. Harbour View Lodge" />
+      </label>
+      <label class="ea-field">
+        <span>Type of place <em>Optional</em></span>
+        <select name="type">
+          <option value="">Choose one</option>
+          <option value="hostel">Hostel or backpackers</option>
+          <option value="motel">Motel</option>
+          <option value="hotel">Hotel or serviced apartments</option>
+          <option value="homestay">Homestay or private rooms</option>
+          <option value="property-manager">Property manager</option>
+          <option value="other">Something else</option>
+        </select>
+      </label>
+      <label class="ea-field">
+        <span>City <em>Optional</em></span>
+        <select name="city">
+          <option value="">Choose one</option>
+          <option value="auckland">Auckland</option>
+          <option value="hamilton">Hamilton</option>
+          <option value="wellington">Wellington</option>
+          <option value="palmerston-north">Palmerston North</option>
+          <option value="christchurch">Christchurch</option>
+          <option value="dunedin">Dunedin</option>
+          <option value="other">Somewhere else</option>
+        </select>
+      </label>
+      <label class="ea-field">
+        <span>Rooms or beds <em>Optional</em></span>
+        <input name="rooms" type="text" maxlength="60" placeholder="e.g. 12 rooms, 40 beds" />
+      </label>
+      <label class="ea-field">
+        <span>Your name</span>
+        <input name="contact" type="text" autocomplete="name" maxlength="100" required placeholder="First and last name" />
+      </label>
+      <label class="ea-field">
+        <span>Your role <em>Optional</em></span>
+        <input name="role" type="text" autocomplete="organization-title" maxlength="60" placeholder="e.g. Owner, Manager" />
+      </label>
+      <label class="ea-field">
+        <span>Phone</span>
+        <input name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="30" placeholder="021 123 4567" />
+      </label>
+      <label class="ea-field">
+        <span>Email <em>Phone or email, one is enough</em></span>
+        <input name="email" type="email" inputmode="email" autocomplete="email" maxlength="254" placeholder="you@example.com" />
+      </label>
+      <label class="ea-field ea-field--wide">
+        <span>Anything we should know? <em>Optional</em></span>
+        <textarea name="message" rows="3" maxlength="800" placeholder="e.g. quiet months, the best time to call, rooms that suit students"></textarea>
+      </label>
+    </div>
+    <!-- Left empty by people; filled in by spam bots. -->
+    <div class="ea-hp" aria-hidden="true">
+      <label>Leave this empty <input name="hp_leave_empty" type="text" tabindex="-1" autocomplete="off" /></label>
+    </div>
+    <button class="btn btn-light btn-lg ea-submit" type="submit">Send enquiry</button>
+    <p class="ea-msg" role="alert" hidden></p>
+    <p class="ea-note">Sending this doesn&rsquo;t commit you to anything. We only use your details to talk to you about SETL. See our <a href="/privacy/">privacy policy</a>.</p>
+  </form>
+  <div class="ea-done" tabindex="-1" hidden>
+    <span class="ea-tick" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+    <h3>Thanks, we&rsquo;ve got it.</h3>
+    <p>One of the founders will get back to you soon by phone or email.</p>
+  </div>
+  <noscript><p class="ea-note">This form needs JavaScript. You can also email <a href="mailto:hello@setl.nz?subject=Partnering%20with%20SETL">hello@setl.nz</a>.</p></noscript>
+</div>
+
+    <p class="partner-or">Prefer email? Write to <a href="mailto:hello@setl.nz?subject=Partnering%20with%20SETL">hello@setl.nz</a>.</p>
   </div>
 </section>
 
@@ -169,6 +243,6 @@
     </div>
   </footer>
 
-  <script src="/assets/js/site.js?v=5250aa981a" defer></script>
+  <script src="/assets/js/site.js?v=fd3ccdc1cd" defer></script>
 </body>
 </html>

@@ -2274,7 +2274,8 @@ body.page-brand .section:first-of-type {
   margin-left: 4px;
 }
 .ea-field input,
-.ea-field select {
+.ea-field select,
+.ea-field textarea {
   width: 100%;
   min-height: 52px;
   padding: 0 16px;
@@ -2286,7 +2287,8 @@ body.page-brand .section:first-of-type {
   font-size: 16px; /* 16px stops phones zooming in on focus */
   transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
 }
-.ea-field input::placeholder {
+.ea-field input::placeholder,
+.ea-field textarea::placeholder {
   color: rgba(255, 255, 255, 0.55);
 }
 .ea-field select {
@@ -2303,17 +2305,20 @@ body.page-brand .section:first-of-type {
   background: #fff;
 }
 .ea-field input:hover,
-.ea-field select:hover {
+.ea-field select:hover,
+.ea-field textarea:hover {
   border-color: rgba(255, 255, 255, 0.55);
 }
 .ea-field input:focus,
-.ea-field select:focus {
+.ea-field select:focus,
+.ea-field textarea:focus {
   outline: none;
   border-color: #fff;
   background-color: rgba(255, 255, 255, 0.18);
   box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.22);
 }
-.ea-field input[aria-invalid='true'] {
+.ea-field input[aria-invalid='true'],
+.ea-field textarea[aria-invalid='true'] {
   border-color: #ffb4b4;
   box-shadow: 0 0 0 4px rgba(255, 120, 120, 0.25);
 }
@@ -3620,4 +3625,23 @@ body.inner .site-header .site-nav a.nav-cta:hover {
   border-radius: 24px;
   background: #0b1530;
   box-shadow: 0 24px 60px rgba(8, 70, 204, 0.25);
+}
+
+/* Partners page enquiry form: the message box and the "prefer email" line. */
+.ea-field textarea {
+  min-height: 96px;
+  padding: 14px 16px;
+  line-height: 1.45;
+  resize: vertical;
+}
+.cta-inner .partner-or {
+  margin: 20px 0 0;
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.78);
+}
+.cta-inner .partner-or a {
+  color: #fff;
+}
+.partner-hero-cta {
+  margin-top: 28px;
 }

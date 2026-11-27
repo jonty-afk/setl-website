@@ -379,6 +379,96 @@ if (window.top !== window.self) {
   });
 })();
 
+/* Partner enquiries: the form on /partners/ for hostels, motels and property managers. */
+(function () {
+  var form = document.querySelector('form[data-partner]');
+  if (!form) return;
+  var EMAIL = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+  var PHONE = /^[0-9+() -]{6,30}$/;
+  var wrap = form.parentNode;
+  var done = wrap.querySelector('.ea-done');
+  var msg = form.querySelector('.ea-msg');
+  var button = form.querySelector('.ea-submit');
+  var fields = form.elements;
+  var checked = [fields.place, fields.contact, fields.phone, fields.email];
+  var LABEL = 'Send enquiry';
+
+  function showError(html, field) {
+    msg.innerHTML = html;
+    msg.hidden = false;
+    if (field) {
+      field.setAttribute('aria-invalid', 'true');
+      field.focus();
+    }
+  }
+  function clearError() {
+    msg.hidden = true;
+    checked.forEach(function (input) {
+      input.removeAttribute('aria-invalid');
+    });
+  }
+  function finish() {
+    form.hidden = true;
+    done.hidden = false;
+    done.focus();
+  }
+  checked.forEach(function (input) {
+    input.addEventListener('input', function () {
+      input.removeAttribute('aria-invalid');
+    });
+  });
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    clearError();
+    var place = fields.place.value.trim();
+    var contact = fields.contact.value.trim();
+    var phone = fields.phone.value.trim();
+    var email = fields.email.value.trim();
+    if (place.length < 2) return showError('Please add the name of your place.', fields.place);
+    if (!contact) return showError('Please add your name.', fields.contact);
+    if (!phone && !email) return showError('Please add a phone number or an email.', fields.phone);
+    if (phone && !PHONE.test(phone)) return showError('Please check the phone number.', fields.phone);
+    if (email && !EMAIL.test(email)) return showError('Please check the email address.', fields.email);
+    if (fields.hp_leave_empty.value) return finish(); // a bot filled the hidden field
+
+    button.disabled = true;
+    button.textContent = 'Sending…';
+    fetch(form.dataset.endpoint + '/rest/v1/partner_enquiries', {
+      method: 'POST',
+      headers: {
+        apikey: form.dataset.key,
+        'Content-Type': 'application/json',
+        Prefer: 'return=minimal',
+      },
+      body: JSON.stringify({
+        place: place,
+        place_type: fields.type.value || null,
+        city: fields.city.value || null,
+        rooms: fields.rooms.value.trim() || null,
+        contact_name: contact,
+        role: fields.role.value.trim() || null,
+        phone: phone || null,
+        email: email || null,
+        message: fields.message.value.trim() || null,
+      }),
+    })
+      .then(function (res) {
+        if (res.ok) return finish();
+        throw new Error('status ' + res.status);
+      })
+      .catch(function () {
+        showError(
+          'Sorry, that didn&rsquo;t go through. Please try again, or email <a href="mailto:hello@setl.nz?subject=Partnering%20with%20SETL">hello@setl.nz</a>.',
+        );
+      })
+      .then(function () {
+        button.disabled = false;
+        button.textContent = LABEL;
+      });
+  });
+})();
+
 // Schedule a call (Video call page). Pressing a founder's button opens one small
 // form under the two buttons. "Send on WhatsApp" does two things: it saves the
 // request to SETL's database (which emails the team), and it opens WhatsApp with
