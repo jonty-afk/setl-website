@@ -3705,7 +3705,8 @@ body.inner .site-header .site-nav a.nav-cta:hover {
 /* Partners page: the blue hero fades into the page colour along an eased curve,
    so there is no visible band or edge where the two meet. */
 .page-hero--blend {
-  padding-bottom: 130px;
+  padding-top: calc(var(--header-h) + 112px);
+  padding-bottom: 170px;
   background:
     radial-gradient(800px 420px at 85% 0%, rgba(255, 255, 255, 0.18), transparent 62%),
     linear-gradient(
@@ -3735,7 +3736,8 @@ body.inner .site-header .site-nav a.nav-cta:hover {
 }
 @media (max-width: 700px) {
   .page-hero--blend {
-    padding-bottom: 100px;
+    padding-top: calc(var(--header-h) + 92px);
+    padding-bottom: 130px;
   }
   .page-hero--blend + .section {
     padding-top: 56px;
