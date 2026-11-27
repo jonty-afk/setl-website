@@ -1001,8 +1001,8 @@ body.inner .site-header .nav-cta {
 }
 .footer-grid {
   display: grid;
-  grid-template-columns: 1.6fr 1fr 1fr 1fr;
-  gap: 40px;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr;
+  gap: 40px 32px;
 }
 .footer-brand p {
   margin-top: 16px;
@@ -3604,4 +3604,20 @@ body.inner .site-header .site-nav a.nav-cta:hover {
 
 .cur-box {
   color: var(--ink);
+}
+
+/* Partners page (/partners/): the one-minute vertical video. */
+.partner-video-wrap {
+  display: flex;
+  justify-content: center;
+}
+.partner-video {
+  display: block;
+  width: 100%;
+  max-width: 340px;
+  height: auto;
+  aspect-ratio: 9 / 16;
+  border-radius: 24px;
+  background: #0b1530;
+  box-shadow: 0 24px 60px rgba(8, 70, 204, 0.25);
 }
