@@ -3642,6 +3642,102 @@ body.inner .site-header .site-nav a.nav-cta:hover {
 .cta-inner .partner-or a {
   color: #fff;
 }
-.partner-hero-cta {
-  margin-top: 28px;
+
+/* Partners page: video on the left, what it means for the partner on the right. */
+.partner-split {
+  display: grid;
+  grid-template-columns: 340px minmax(0, 1fr);
+  gap: 72px;
+  align-items: center;
+  max-width: 1020px;
+  margin-inline: auto;
+}
+.partner-copy h2 {
+  font-size: clamp(28px, 3.4vw, 42px);
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+.partner-points {
+  list-style: none;
+  margin: 36px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 26px;
+}
+.partner-points li {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+}
+.partner-num {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--blue) 14%, transparent);
+  color: var(--blue);
+  font-weight: 750;
+  font-size: 16px;
+}
+.partner-points h3 {
+  font-size: 19px;
+  letter-spacing: -0.02em;
+}
+.partner-points p {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 16px;
+}
+@media (prefers-color-scheme: dark) {
+  .partner-num {
+    color: #8fb6ff;
+  }
+}
+@media (max-width: 900px) {
+  .partner-split {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+}
+
+/* Partners page: the blue hero fades into the page colour along an eased curve,
+   so there is no visible band or edge where the two meet. */
+.page-hero--blend {
+  padding-bottom: 130px;
+  background:
+    radial-gradient(800px 420px at 85% 0%, rgba(255, 255, 255, 0.18), transparent 62%),
+    linear-gradient(
+      180deg,
+      #0a5bff 0%,
+      #0850e6 36%,
+      #0646c8 64%,
+      color-mix(in srgb, var(--bg) 2%, #0646c8) 67.0%,
+      color-mix(in srgb, var(--bg) 7%, #0646c8) 70.0%,
+      color-mix(in srgb, var(--bg) 16%, #0646c8) 73.0%,
+      color-mix(in srgb, var(--bg) 26%, #0646c8) 76.0%,
+      color-mix(in srgb, var(--bg) 38%, #0646c8) 79.0%,
+      color-mix(in srgb, var(--bg) 50%, #0646c8) 82.0%,
+      color-mix(in srgb, var(--bg) 62%, #0646c8) 85.0%,
+      color-mix(in srgb, var(--bg) 74%, #0646c8) 88.0%,
+      color-mix(in srgb, var(--bg) 84%, #0646c8) 91.0%,
+      color-mix(in srgb, var(--bg) 93%, #0646c8) 94.0%,
+      color-mix(in srgb, var(--bg) 98%, #0646c8) 97.0%,
+      color-mix(in srgb, var(--bg) 100%, #0646c8) 100.0%
+    );
+}
+.page-hero--blend .container {
+  z-index: 1;
+}
+.page-hero--blend + .section {
+  padding-top: 80px;
+}
+@media (max-width: 700px) {
+  .page-hero--blend {
+    padding-bottom: 100px;
+  }
+  .page-hero--blend + .section {
+    padding-top: 56px;
+  }
 }
