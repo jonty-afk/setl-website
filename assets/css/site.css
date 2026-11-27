@@ -1689,7 +1689,7 @@ body.page-brand .section:first-of-type {
     gap: 48px;
   }
 }
-@media (max-width: 960px) {
+@media (max-width: 1120px) {
   .nav-toggle {
     display: block;
   }
@@ -3494,7 +3494,7 @@ body.inner .site-header .site-nav a.nav-cta:hover {
 .header-wa {
   display: none;
 }
-@media (max-width: 960px) {
+@media (max-width: 1120px) {
   /* Phone: the symbol sits in the top bar beside the menu button... */
   .header-wa {
     display: inline-flex;
